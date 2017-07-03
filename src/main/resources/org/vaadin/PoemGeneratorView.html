@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.0.5">
+ </head>
+ <body>
+  <vaadin-vertical-layout size-full>
+   <vaadin-label style-name="h3" width-full plain-text>
+     Experimental deep learning (RNN) demonstration for generating traditional Finnish poems 
+   </vaadin-label>
+   <vaadin-label width-full plain-text>
+     RNN teached with Kalevala, Kanteletar and other poems collected by Elias Lönnrot. 
+   </vaadin-label>
+   <vaadin-label plain-text>
+     Kokeellinen deep learning Kalevala-runogeneraattori 
+   </vaadin-label>
+   <vaadin-horizontal-layout width-full>
+    <vaadin-text-field caption-as-html caption="Optional first words (ensimmäiset sanat) 0-160 chars" width-full maxlength="160" _id="firstWordsField" :expand></vaadin-text-field>
+    <vaadin-slider caption-as-html max="800" caption="Lenght (chars)" min="80" value="320" _id="seqLengthField" :bottom></vaadin-slider>
+    <vaadin-button style-name="friendly" plain-text _id="generateButton" :bottom>
+      Generate 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-text-area rows="20" placeholder="" width-full readonly _id="poemField" :expand></vaadin-text-area>
+   <vaadin-horizontal-layout visible="false" :middle :right>
+    <vaadin-button plain-text _id="trainMoreButton">
+      Train more 
+    </vaadin-button>
+    <vaadin-button plain-text _id="removeButton" :middle :right>
+      Remove 
+    </vaadin-button>
+    <vaadin-button plain-text _id="saveButton" :middle :right>
+      Save 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-grid visible="false" size-full _id="poemsGrid" :expand>
+    <table>
+     <colgroup>
+      <col column-id="poem" sortable="false">
+      <col column-id="rating" sortable="false">
+     </colgroup>
+     <thead>
+      <tr default>
+       <th plain-text column-ids="poem">Poem</th>
+       <th plain-text column-ids="rating">Rating</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr item="p1">
+       <td>...</td>
+       <td>...</td>
+      </tr>
+      <tr item="p2">
+       <td>...</td>
+       <td>...</td>
+      </tr>
+      <tr item="p3">
+       <td>...</td>
+       <td>...</td>
+      </tr>
+     </tbody>
+    </table>
+   </vaadin-grid>
+   <vaadin-horizontal-layout :middle :right>
+    <vaadin-link caption-as-html caption="DEEPLEARNING4J" href="https://deeplearning4j.org"></vaadin-link>
+    <vaadin-link caption="VAADIN" href="https://vaadin.com/framework"></vaadin-link>
+    <vaadin-link caption="KALEVALA" href="https://en.wikipedia.org/wiki/Kalevala"></vaadin-link>
+   </vaadin-horizontal-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>
