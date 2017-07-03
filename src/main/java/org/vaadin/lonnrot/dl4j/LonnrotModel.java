@@ -191,7 +191,7 @@ public class LonnrotModel {
     public CharacterIterator getLonnrotIterator(int miniBatchSize,
             int sequenceLength) throws Exception {
         // poems collected by Elias Lonnrot
-        String fileLocation = "/Users/jotatu/dev/deeplearning/lonnrot/raw.txt";
+        String fileLocation = System.getProperty("user.home")+"/raw.txt";
 
         File f = new File(fileLocation);
 
