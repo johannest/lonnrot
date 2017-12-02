@@ -1,10 +1,11 @@
 package org.vaadin.lonnrot;
 
-import com.vaadin.ui.Notification;
+import java.io.IOException;
+
 import org.vaadin.PoemGeneratorView;
 import org.vaadin.lonnrot.dl4j.LonnrotModel;
 
-import java.io.IOException;
+import com.vaadin.ui.Notification;
 
 public class PoemGeneratorViewImpl extends PoemGeneratorView {
 

@@ -1,8 +1,12 @@
 package org.vaadin.lonnrot.dl4j;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
 import org.deeplearning4j.nn.api.Layer;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.BackpropType;
@@ -21,10 +25,6 @@ import org.nd4j.linalg.dataset.api.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-
 /**
  * Copied and modified from: https://github.com/deeplearning4j/dl4j-examples/
  * blob/master/dl4j-examples/src/main/java/org/deeplearning4j/examples/
@@ -36,21 +36,21 @@ public class LonnrotModel {
 
     // Hyper parameters
     // Number of units in each GravesLSTM layer
-    int lstmLayerSize = 600;
+    int lstmLayerSize = 550;
     // Size of mini batch to use when training
-    int miniBatchSize = 50;
+    int miniBatchSize = 100;
     // Length of each training example sequence to use
-    int exampleLength = 1600;
+    int exampleLength = 2400;
     // Length for truncated backpropagation through time.
     // i.e., do parameter updates every 75 characters
-    int tbpttLength = 75;
+    int tbpttLength = 100;
     // Total number of training epochs
-    int numEpochs = 5;
+    int numEpochs = 100;
     // How frequently to generate
     // samples from the network?
-    int generateSamplesEveryNMinibatches = 10;
+    int generateSamplesEveryNMinibatches = 5;
     // Number of samples to generate after each training epoch
-    int nSamplesToGenerate = 2;
+    int nSamplesToGenerate = 8;
     // Length of each sample to generate
     int nCharactersToSample = 500;
     // Optional character
@@ -82,9 +82,9 @@ public class LonnrotModel {
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                 .optimizationAlgo(
                         OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-                .iterations(1).learningRate(0.15).rmsDecay(0.95).seed(12345)
-                .regularization(true).dropOut(0.6).weightInit(WeightInit.XAVIER)
-                .updater(Updater.RMSPROP).list()
+                .iterations(1).learningRate(0.3).seed(12345)
+                .regularization(true).dropOut(0.8).weightInit(WeightInit.XAVIER)
+                .updater(Updater.ADAM).list()
                 .layer(0,
                         new GravesLSTM.Builder()
                                 .nIn(characterIterator.inputColumns())
@@ -95,6 +95,10 @@ public class LonnrotModel {
                                 .nOut(lstmLayerSize).activation(Activation.TANH)
                                 .build())
                 .layer(2,
+                        new GravesLSTM.Builder().nIn(lstmLayerSize)
+                                .nOut(lstmLayerSize).activation(Activation.TANH)
+                                .build())
+                .layer(3,
                         new RnnOutputLayer.Builder(
                                 LossFunctions.LossFunction.MCXENT)
                                         .activation(Activation.SOFTMAX)
@@ -107,7 +111,7 @@ public class LonnrotModel {
 
         model = new MultiLayerNetwork(conf);
         model.init();
-        model.setListeners(new ScoreIterationListener(50));
+        model.setListeners(new ScoreIterationListener(25));
 
         // Print the number of parameters in the network (and for each layer)
         Layer[] layers = model.getLayers();

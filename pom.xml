@@ -22,9 +22,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<!-- If there are no local customisations, this can also be "fetch" or "cdn" -->
 		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
-		<nd4j.version>0.8.0</nd4j.version>
-		<dl4j.version>0.8.0</dl4j.version>
-		<datavec.version>0.8.0</datavec.version>
+		<nd4j.version>0.9.1</nd4j.version>
+		<dl4j.version>0.9.1</dl4j.version>
+		<datavec.version>0.9.1</datavec.version>
 
 		<!-- Change the nd4j.backend property to nd4j-cuda-7.5-platform or nd4j-cuda-8.0-platform to use CUDA GPUs -->
 		<nd4j.backend>nd4j-native-platform</nd4j.backend>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>org.nd4j</groupId>
 			<artifactId>nd4j-api</artifactId>
-			<version>0.8.0</version>
+			<version>${nd4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

@@ -27,8 +27,6 @@ public class PoemGeneratorView extends VerticalLayout {
     protected Button generateButton;
     protected TextArea poemField;
     protected Button trainMoreButton;
-    protected Button removeButton;
-    protected Button saveButton;
     protected Grid poemsGrid;
 
     public PoemGeneratorView() {

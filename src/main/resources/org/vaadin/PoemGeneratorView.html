@@ -2,7 +2,7 @@
 <html>
  <head>
   <meta charset="UTF-8">
-  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
   <meta name="vaadin-version" content="8.0.5">
  </head>
  <body>
@@ -24,15 +24,9 @@
     </vaadin-button>
    </vaadin-horizontal-layout>
    <vaadin-text-area rows="20" placeholder="" width-full readonly _id="poemField" :expand></vaadin-text-area>
-   <vaadin-horizontal-layout visible="false" :middle :right>
-    <vaadin-button plain-text _id="trainMoreButton">
+   <vaadin-horizontal-layout :middle :right>
+    <vaadin-button enabled="false" plain-text _id="trainMoreButton">
       Train more 
-    </vaadin-button>
-    <vaadin-button plain-text _id="removeButton" :middle :right>
-      Remove 
-    </vaadin-button>
-    <vaadin-button plain-text _id="saveButton" :middle :right>
-      Save 
     </vaadin-button>
    </vaadin-horizontal-layout>
    <vaadin-grid visible="false" size-full _id="poemsGrid" :expand>
