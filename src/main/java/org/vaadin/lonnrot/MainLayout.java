@@ -15,7 +15,6 @@ import com.vaadin.ui.html.Anchor;
 import com.vaadin.ui.html.Div;
 import com.vaadin.ui.html.H2;
 import com.vaadin.ui.html.H3;
-import com.vaadin.ui.html.H4;
 import com.vaadin.ui.html.Label;
 import com.vaadin.ui.layout.FlexLayout;
 import com.vaadin.ui.layout.HorizontalLayout;
@@ -25,10 +24,9 @@ public class MainLayout extends Div
         implements RouterLayout, AfterNavigationObserver {
 
     private LonnrotModel model;
-    private Label resultLabel;
+    private TextArea resultTextArea;
 
     public MainLayout() {
-
         H2 title = new H2("Experimental deep learning (RNN) demonstration for generating traditional Finnish poems");
         title.setWidth("100%");
 
@@ -44,36 +42,34 @@ public class MainLayout extends Div
 
         TextField firstWordsField = new TextField("Optional first words (ensimmäiset sanat) 0-160 chars");
         firstWordsField.setWidth("100%");
+        firstWordsField.addClassName("first-words");
 
         ComboBox<Integer> seqLengthField = new ComboBox<>("Lenght (chars)");
+        seqLengthField.addClassName("length-select");
         seqLengthField.setWidth("120px");
-        seqLengthField.setDataProvider(new ListDataProvider<Integer>(Arrays.asList(100, 150, 200, 250, 500)));
-        seqLengthField.setValue(100);
+        seqLengthField.setDataProvider(new ListDataProvider<Integer>(Arrays.asList(100, 150, 200, 250, 500, 750)));
+        seqLengthField.setValue(200);
 
         Button generateButton = new Button("Generate");
-        generateButton.setWidth("100px");
+        generateButton.setWidth("150px");
         generateButton.addClassName("friendly");
         generateButton.addClickListener(e-> {
             String initialSeq = firstWordsField.getValue();
             int length = seqLengthField.getValue();
             String[] samples = model.sampleCharactersFromNetwork(initialSeq, length, 1);
+
             System.out.println(samples[0]);
-            resultLabel.setText(samples[0]);
+            resultTextArea.setValue(samples[0]);
         });
 
 
-        H4 resultCaption = new H4("Genereated poem:");
+        Label resultCaption = new Label("Genereated poem:");
+        resultCaption.addClassName("caption");
 
-        resultLabel = new Label();
-        resultLabel.setSizeFull();
-
-        Div resultLabelWrap = new Div();
-        resultLabelWrap.addClassName("result-wrap");
-        resultLabelWrap.setSizeFull();
-        resultLabelWrap.add(resultCaption, resultLabel);
+        resultTextArea = new TextArea();
+        resultTextArea.addClassName("result-text");
 
         inputLayout.add(firstWordsField, seqLengthField, generateButton);
-
 
         Anchor dl4jLink = new Anchor("https://deeplearning4j.org/", "DEEPLEARNING4j");
 
@@ -82,7 +78,7 @@ public class MainLayout extends Div
         footerLayout.setAlignItems(FlexLayout.Alignment.END);
         footerLayout.add(dl4jLink);
 
-        add(title, description1, description2, inputLayout, resultLabelWrap, footerLayout);
+        add(title, description1, description2, inputLayout, resultTextArea, footerLayout);
         addClassName("main-layout");
     }
 
