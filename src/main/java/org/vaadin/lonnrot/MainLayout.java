@@ -68,6 +68,8 @@ public class MainLayout extends Div
 
         resultTextArea = new TextArea();
         resultTextArea.addClassName("result-text");
+        resultTextArea.setReadonly(true);
+        resultTextArea.setRows(5);
 
         inputLayout.add(firstWordsField, seqLengthField, generateButton);
 

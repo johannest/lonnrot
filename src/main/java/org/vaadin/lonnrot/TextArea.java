@@ -27,7 +27,7 @@ public class TextArea extends Component implements HasStyle {
 
 
     public int getRows() {
-        return getElement().getProperty("rows", 5);
+        return getElement().getProperty("rows", 1);
     }
 
     public void setRows(int rows) {
@@ -35,7 +35,7 @@ public class TextArea extends Component implements HasStyle {
     }
 
     public int getMaxRows() {
-        return getElement().getProperty("maxRows", 100);
+        return getElement().getProperty("maxRows", 0);
     }
 
     public void setMaxRows(int maxRows) {
@@ -51,7 +51,7 @@ public class TextArea extends Component implements HasStyle {
     }
 
     public int getMaxlength() {
-        return getElement().getProperty("maxlength", 1000);
+        return getElement().getProperty("maxlength", 0);
     }
 
     public void setMaxlength(int maxlength) {
